@@ -1,0 +1,18 @@
+package com.ruancode.testes;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class TesteAutomatizado {
+	@Before
+	public void initialize() {
+		System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\chromedriver\\chromedriver.exe");
+		
+	}
+	
+	@Test
+	public void botTest(){
+		
+	}
+}

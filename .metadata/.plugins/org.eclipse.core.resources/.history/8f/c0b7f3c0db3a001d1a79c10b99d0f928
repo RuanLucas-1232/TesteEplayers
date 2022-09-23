@@ -1,0 +1,24 @@
+package com.ruancode.testes;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class TesteAutomatizado {
+	private WebDriver driver;
+	@Before
+	public void initialize() {
+		System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\chromedriver\\chromedriver.exe");
+		driver = new ChromeDriver();//O construtor faz com que o driver (bot) tenha acesso ao navegador
+		driver.manage().window().maximize();
+		}
+	
+	@Test
+	public void botTest() throws InterruptedException{
+		driver.get("http://localhost:4200/");
+		Thread.sleep(2000);
+		driver.findElement(By.name("/login")).click();
+	}
+}

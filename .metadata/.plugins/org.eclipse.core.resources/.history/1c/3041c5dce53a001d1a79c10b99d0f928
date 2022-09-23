@@ -1,0 +1,52 @@
+package com.ruancode.testes;
+
+import org.junit.Before;
+import org.junit.Test;
+import org.openqa.selenium.By;
+import org.openqa.selenium.Keys;
+import org.openqa.selenium.WebDriver;
+import org.openqa.selenium.chrome.ChromeDriver;
+
+public class TesteAutomatizado {
+	private ChromeDriver driver;
+	@Before
+	public void initialize() {
+		System.setProperty("webdriver.chrome.driver", "C:\\Program Files\\chromedriver\\chromedriver.exe");
+		driver = new ChromeDriver();//O construtor faz com que o driver (bot) tenha acesso ao navegador e o abra.
+		driver.manage().window().maximize();
+		driver.get("http://localhost:4200/");
+	}
+	
+	@Test
+	public void botTest() throws InterruptedException{
+		Thread.sleep(2000);
+		//driver.findElement(By.xpath("//*[@id=\"usuario\"]")).click();
+		driver.findElement(By.xpath("/html/body/app-root/app-home/app-header/header/div/nav/a[6]")).click();
+		String[] blackList = {"SELECT", "FROM", " ", "DATABASE", "OR", "--", "DROP", ";", "1=1", "\" \"=\" \"", "AND"};
+		for(int i = 0; i < blackList.length; i++) {
+			Thread.sleep(2000);
+			driver.findElement(By.id("usuario")).sendKeys(blackList[i]);
+			Thread.sleep(2000);
+			driver.findElement(By.id("email")).sendKeys(blackList[i]);
+			Thread.sleep(2000);
+			driver.findElement(By.id("senha")).sendKeys(blackList[i]);
+			Thread.sleep(2000);
+			driver.findElement(By.xpath("/html/body/app-root/app-login/div/form/button")).click(); 
+		}
+		Thread.sleep(2000);
+		driver.findElement(By.id("usuario")).sendKeys(Keys.CLEAR.DELETE);//O objeto Keys usa um botão do teclado, neste caso o Clear (limpar)
+		Thread.sleep(2000);
+		driver.findElement(By.id("email")).sendKeys(Keys.CLEAR.DELETE);
+		Thread.sleep(2000);
+		driver.findElement(By.id("senha")).sendKeys(Keys.CLEAR.DELETE);
+	
+		Thread.sleep(2000);
+		driver.findElement(By.id("usuario")).sendKeys("Ruan");
+		Thread.sleep(2000);
+		driver.findElement(By.id("email")).sendKeys("Ruan@email.com");
+		Thread.sleep(2000);
+		driver.findElement(By.id("senha")).sendKeys("123456789");
+		Thread.sleep(2000);
+		driver.findElement(By.xpath("/html/body/app-root/app-login/div/form/button")).click();
+	}
+}
